@@ -1,0 +1,11 @@
+{% extends 'base.html' %}
+{% block content %}
+<h1>Review Customer</h1>
+<p>Name: {{ customer.name }}</p>
+<p>Status: {{ customer.status }}</p>
+<form method="post">
+    {% csrf_token %}
+    <button type="submit" name="action" value="approve">Approve</button>
+    <button type="submit" name="action" value="decline">Decline</button>
+</form>
+{% endblock %}
