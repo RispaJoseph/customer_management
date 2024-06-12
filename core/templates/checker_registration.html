@@ -1,15 +1,105 @@
 <!DOCTYPE html>
-<html>
+<html lang="en">
 <head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Checker Registration</title>
+    <style>
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background-color: #e9ecef;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+            margin: 0;
+        }
+        .registration-container {
+            background-color: #fff;
+            padding: 40px;
+            border-radius: 10px;
+            box-shadow: 0 10px 20px rgba(0, 0, 0, 0.1);
+            width: 100%;
+            max-width: 400px;
+            text-align: center;
+        }
+        .registration-container h2 {
+            margin-bottom: 30px;
+            font-size: 24px;
+            color: #343a40;
+        }
+        .form-group {
+            margin-bottom: 20px;
+        }
+        .form-group label {
+            display: block;
+            margin-bottom: 5px;
+            font-weight: bold;
+            color: #495057;
+        }
+        .form-group input[type="text"],
+        .form-group input[type="password"],
+        .form-group input[type="email"],
+        .form-group select {
+            width: calc(100% - 20px);
+            padding: 10px;
+            border: 1px solid #ced4da;
+            border-radius: 5px;
+            font-size: 16px;
+            outline: none;
+            transition: border-color 0.3s ease;
+        }
+        .form-group input[type="text"]:focus,
+        .form-group input[type="password"]:focus,
+        .form-group input[type="email"]:focus,
+        .form-group select:focus {
+            border-color: #007bff;
+        }
+        .form-group input[type="text"]::placeholder,
+        .form-group input[type="password"]::placeholder,
+        .form-group input[type="email"]::placeholder {
+            color: #adb5bd;
+        }
+        .submit-btn {
+            width: 100%;
+            padding: 12px 0;
+            border: none;
+            border-radius: 5px;
+            background-color: #007bff;
+            color: #fff;
+            font-size: 18px;
+            font-weight: bold;
+            cursor: pointer;
+            transition: background-color 0.3s ease;
+        }
+        .submit-btn:hover {
+            background-color: #0056b3;
+        }
+    </style>
 </head>
 <body>
-    <h2>Checker Registration</h2>
-    <form method="post">
-        {% csrf_token %}
-        {{ user_form.as_p }}
-        {{ checker_form.as_p }}
-        <button type="submit">Register</button>
-    </form>
+    <div class="registration-container">
+        <h2>Checker Registration</h2>
+        <form method="post">
+            {% csrf_token %}
+            <div class="form-group">
+                {{ user_form.username.label_tag }}
+                {{ user_form.username }}
+            </div>
+            <div class="form-group">
+                {{ user_form.password1.label_tag }}
+                {{ user_form.password1 }}
+            </div>
+            <div class="form-group">
+                {{ user_form.password2.label_tag }}
+                {{ user_form.password2 }}
+            </div>
+            <div class="form-group">
+                {{ checker_form.as_p }}
+            </div>
+            <button type="submit" class="submit-btn">Register</button>
+        </form>
+    </div>
 </body>
 </html>
