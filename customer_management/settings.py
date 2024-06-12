@@ -9,7 +9,7 @@ https://docs.djangoproject.com/en/4.0/topics/settings/
 For the full list of settings and their values, see
 https://docs.djangoproject.com/en/4.0/ref/settings/
 """
-
+import os
 from pathlib import Path
 
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
@@ -37,6 +37,8 @@ INSTALLED_APPS = [
     'django.contrib.sessions',
     'django.contrib.messages',
     'django.contrib.staticfiles',
+
+    'core',
 ]
 
 MIDDLEWARE = [
@@ -54,7 +56,7 @@ ROOT_URLCONF = 'customer_management.urls'
 TEMPLATES = [
     {
         'BACKEND': 'django.template.backends.django.DjangoTemplates',
-        'DIRS': [],
+        'DIRS': [os.path.join(BASE_DIR,'templates')],
         'APP_DIRS': True,
         'OPTIONS': {
             'context_processors': [
@@ -67,18 +69,52 @@ TEMPLATES = [
     },
 ]
 
+
 WSGI_APPLICATION = 'customer_management.wsgi.application'
 
 
 # Database
 # https://docs.djangoproject.com/en/4.0/ref/settings/#databases
 
+# DATABASES = {
+#     'default': {
+#         'ENGINE': 'djongo',
+#         'NAME': 'customer_management',
+#         'ENFORCE_SCHEMA': False,
+#         'CLIENT': {
+#             'host': 'localhost',
+#             'port': 27017,
+#             'username': 'rispa',
+#             'password': 'rispa123',
+#             'authSource': 'admin',
+#             'authMechanism': 'SCRAM-SHA-1',
+#         },
+#     }
+# }
+
 DATABASES = {
     'default': {
         'ENGINE': 'djongo',
-        'NAME': 'customer_management_db',
+        'NAME': 'customer_management',
+        'CLIENT': {
+            'host': 'mongodb://rispa:rispa123@localhost:27017/',
+            'username': 'rispa',
+            'password': 'rispa123',
+            'authSource': 'admin',
+            'authMechanism': 'SCRAM-SHA-1',
+        }
     }
 }
+
+MEDIA_URL = '/media/'
+MEDIA_ROOT = os.path.join(BASE_DIR, 'media')
+
+
+
+
+
+
+
 
 
 

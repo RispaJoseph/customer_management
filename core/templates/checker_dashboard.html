@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Checker Dashboard</title>
+</head>
+<body>
+    <h1>Welcome to Checker Dashboard</h1>
+    <h2>Customers Uploaded by Your Makers:</h2>
+    <ul>
+        {% for customer in customers %}
+        <li>
+            <h3>{{ customer.name }}</h3>
+            <img src="{{ customer.photo.url }}" alt="{{ customer.name }} Photo" width="100">
+            <p>Resume: <a href="{{ customer.resume.url }}" target="_blank">Download</a></p>
+            <p>Status: {{ customer.status }}</p>
+            <form action="{% url 'approve_decline_customer' customer.id %}" method="post">
+                {% csrf_token %}
+                <select name="action">
+                    <option value="pending" {% if customer.status == 'Pending' %}selected{% endif %}>Pending</option>
+                    <option value="approved" {% if customer.status == 'Approved' %}selected{% endif %}>Approved</option>
+                    <option value="declined" {% if customer.status == 'Declined' %}selected{% endif %}>Declined</option>
+                </select>
+                <button type="submit">Update Status</button>
+            </form>
+        </li>
+        {% endfor %}
+    </ul>
+</body>
+</html>

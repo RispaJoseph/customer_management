@@ -1,0 +1,15 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Checker Registration</title>
+</head>
+<body>
+    <h2>Checker Registration</h2>
+    <form method="post">
+        {% csrf_token %}
+        {{ user_form.as_p }}
+        {{ checker_form.as_p }}
+        <button type="submit">Register</button>
+    </form>
+</body>
+</html>
